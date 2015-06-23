@@ -1,0 +1,3 @@
+Copyright 2015 MRFALSE
+Tento System je upravený z pôvodného basicBota. Tento System vlastní MRFALSE.
+System neprofituje žiadne peniaze. System je chránený licenčnou zmlúvou. Jeho skopirovanie sa prísne trestá!
