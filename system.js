@@ -54,7 +54,7 @@
     var loadChat = function (cb) {
         if (!cb) cb = function () {
         };
-        $.get("https://rawgit.com/MRFALSE/BeatBotFalse/master/lang.json", function (json) {
+        $.get("https://rawgit.com/DEVELOPERMF/DUPBOT/master/lang.json", function (json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== "undefined") {
                 langIndex = json;
@@ -174,26 +174,26 @@
         return m;
     };
 
-    var botCreator = "MrFalse";
+    var botCreator = "MR FALSE";
     var botMaintainer = ""
     var botCreatorIDs = ["4635487", "4635487"];
 
     var basicBot = {
         version: "2.10.4",
         status: false,
-        name: "BeatBot",
+        name: "DupBot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/MRFALSE/BeatBotFalse/master/system.js",
+        scriptLink: "https://rawgit.com/DEVELOPERMF/DUPBOT/master/system.js",
         cmdLink: "http://git.io/245Ppg",
-        chatLink: "https://rawgit.com/MRFALSE/BeatBotFalse/master/slovak.json",
+        chatLink: "https://rawgit.com/DEVELOPERMF/DUPBOT/master/slovak.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
         retrieveFromStorage: retrieveFromStorage,
         settings: {
-            botName: "BeatBot",
+            botName: "DupBot",
             language: "slovak",
-            chatLink: "https://rawgit.com/MRFALSE/BeatBotFalse/master/slovak.json",
+            chatLink: "https://rawgit.com/DEVELOPERMF/DUPBOT/master/slovak.json",
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
             startupEmoji: false, // true or false
@@ -298,8 +298,8 @@
             autodisableInterval: null,
             autodisableFunc: function () {
                 if (basicBot.status && basicBot.settings.autodisable) {
-                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/beatczsk');
-                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/beatczsk');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/');
                 }
             },
             queueing: 0,
@@ -2686,45 +2686,6 @@
                             }
                             else {
                                 return API.sendChat(subChat(basicBot.chat.gift, {nameto: user.username, namefrom: chat.un, cookie: this.getCookie()}));
-                            }
-                        }
-                    }
-                }
-            },
-            
-            fuckCommand: {
-                command: 'fuck',
-                rank: 'user',
-                type: 'startsWith',
-                cookies: ['ta nakopol do zadku, takže môžeš byť rád/a, že si ostal/a v miestnosti. :grin:',
-                    'ta zje s botama! :shoe:'
-                ],
-                getCookie: function () {
-                    var c = Math.floor(Math.random() * this.cookies.length);
-                    return this.cookies[c];
-                },
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        var msg = chat.message;
-
-                        var space = msg.indexOf(' ');
-                        if (space === -1) {
-                            API.sendChat(basicBot.chat.givefuck);
-                            return false;
-                        }
-                        else {
-                            var name = msg.substring(space + 2);
-                            var user = basicBot.userUtilities.lookupUserName(name);
-                            if (user === false || !user.inRoom) {
-                                return API.sendChat(subChat(basicBot.chat.nofuck, {name: name}));
-                            }
-                            else if (user.username === chat.un) {
-                                return API.sendChat(subChat(basicBot.chat.selfuck, {name: name}));
-                            }
-                            else {
-                                return API.sendChat(subChat(basicBot.chat.fuck, {nameto: user.username, namefrom: chat.un, cookie: this.getCookie()}));
                             }
                         }
                     }
