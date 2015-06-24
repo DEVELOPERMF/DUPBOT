@@ -179,7 +179,7 @@
     var botCreatorIDs = ["4635487", "4635487"];
 
     var basicBot = {
-        version: "2.10.4",
+        version: "2.10.5",
         status: false,
         name: "DupBot",
         loggedInID: null,
@@ -298,8 +298,8 @@
             autodisableInterval: null,
             autodisableFunc: function () {
                 if (basicBot.status && basicBot.settings.autodisable) {
-                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/');
-                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/dupcity');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/dupcity');
                 }
             },
             queueing: 0,
