@@ -298,8 +298,8 @@
             autodisableInterval: null,
             autodisableFunc: function () {
                 if (basicBot.status && basicBot.settings.autodisable) {
-                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/dupcity');
-                    API.sendChat('Daj :+1: našej facebook stránke> https://fb.com/dupcity');
+                    API.sendChat('Hľadáme Správcov komunity, pripoj sa aj ty> http://dupcity.webnode.sk/nabor');
+                    API.sendChat('Hľadáme Správcov komunity, pripoj sa aj ty> http://dupcity.webnode.sk/nabor');
                 }
             },
             queueing: 0,
