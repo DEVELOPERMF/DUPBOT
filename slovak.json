@@ -8,8 +8,8 @@
     "online": "/me System %%BOTNAME%% je online! Verzia %%VERSION%%!",
 
 
-    "welcome": "Vitaj @%%NAME%%, podaj prihlášku> http://dupcity.webnode.sk/nabor :heart:",
-    "welcomeback": "Vitaj späť @%%NAME%%, podaj prihlášku> http://dupcity.webnode.sk/nabor :heart:",
+    "welcome": "Vitaj @%%NAME%%! :heart:",
+    "welcomeback": "Vitaj späť @%%NAME%%! :heart:",
     "songknown": "/me @%%NAME%%> Tvoj song je v histórii.",
     "timelimit": "/me @%%NAME%%> Tvoj song je dlhší ako 6 minút. System ti nepovoluje hrať dlhšie songy.",
     "permissionownsong": "/me Chyba v databáze.",
@@ -125,7 +125,7 @@
     "swapping": "/me System> Použil Swap s Užívateľmi %%NAME1%% a %%NAME2%%.",
     "notbanned": "/me Chyba v databáze.",
     "unmutedeveryone": "/me @%%NAME%%> Použil unmute na všetkých.",
-    "songstatistics": "Hľadáme Správcov komunity, pripoj sa aj ty> http://dupcity.webnode.sk/nabor",
+    "songstatistics": "Daj :+1: našej facebook stránke> https://www.fb.com/dupcity",
     "premium": "/me %%NAME%%> Premium získaš na> https://plug.dj/subscribe",
     "whylock": "/me Waitlist je zamknutý, pre pripojenie použi !join",
     "givegift": "/me Môžeš niekomu poslať darček. Napíš !gift @Používateľ.",
