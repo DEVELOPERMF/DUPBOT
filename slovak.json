@@ -8,8 +8,8 @@
     "online": "/me System %%BOTNAME%% je online! Verzia %%VERSION%%!",
 
 
-    "welcome": "Vitaj @%%NAME%%!",
-    "welcomeback": "Vitaj späť @%%NAME%%!",
+    "welcome": "Vitaj @%%NAME%%, podaj prihlášku> http://dupcity.webnode.sk/nabor :heart:",
+    "welcomeback": "Vitaj späť @%%NAME%%, podaj prihlášku> http://dupcity.webnode.sk/nabor :heart:",
     "songknown": "/me @%%NAME%%> Tvoj song je v histórii.",
     "timelimit": "/me @%%NAME%%> Tvoj song je dlhší ako 6 minút. System ti nepovoluje hrať dlhšie songy.",
     "permissionownsong": "/me Chyba v databáze.",
