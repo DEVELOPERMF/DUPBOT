@@ -1,6 +1,6 @@
 /**
- *Copyright 2015 MrFalse
- *Tento System je upravený z pôvodného basicBota. Tento System vlastní MrFalse.
+ *Copyright 2015 MRFALSE
+ *Tento System je upravený z pôvodného basicBota. Tento System vlastní MRFALSE.
  *System neprofituje žiadne peniaze. System je chránený licenčnou zmlúvou. Jeho skopirovanie sa prísne trestá!
  */
 
@@ -179,8 +179,8 @@
     var botCreatorIDs = ["4635487", "4635487"];
 
     var basicBot = {
-        version: "3.2",
-        status: false,
+        version: "1.2.3",
+        status: true,
         name: "DupBot",
         loggedInID: null,
         scriptLink: "https://rawgit.com/DEVELOPERMF/DUPBOT/master/system.js",
@@ -201,18 +201,18 @@
             maximumAfk: 120,
             afkRemoval: false,
             maximumDc: 60,
-            bouncerPlus: true,
-            blacklistEnabled: true,
+            bouncerPlus: false,
+            blacklistEnabled: false,
             lockdownEnabled: false,
             lockGuard: false,
             maximumLocktime: 10,
-            cycleGuard: true,
+            cycleGuard: false,
             maximumCycletime: 10,
-            voteSkip: false,
-            voteSkipLimit: 10,
-            historySkip: false,
+            voteSkip: true,
+            voteSkipLimit: 5,
+            historySkip: true,
             timeGuard: true,
-            maximumSongLength: 10,
+            maximumSongLength: 6,
             autodisable: true,
             commandCooldown: 30,
             usercommandsEnabled: true,
@@ -264,7 +264,7 @@
             afkpositionCheck: 15,
             afkRankCheck: "ambassador",
             motdEnabled: false,
-            motdInterval: 5,
+            motdInterval: 2,
             motd: "Temporary Message of the Day",
             filterChat: true,
             etaRestriction: false,
@@ -298,8 +298,8 @@
             autodisableInterval: null,
             autodisableFunc: function () {
                 if (basicBot.status && basicBot.settings.autodisable) {
-                    API.sendChat('Hľadáme Správcov komunity, pripoj sa aj ty> http://dupcity.webnode.sk/nabor');
-                    API.sendChat('Hľadáme Správcov komunity, pripoj sa aj ty> http://dupcity.webnode.sk/nabor');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://www.fb.com/dupcity');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://www.fb.com/dupcity');
                 }
             },
             queueing: 0,
@@ -1366,7 +1366,7 @@
              **/
 
             autodisableCommand: {
-                command: 'autodisable',
+                command: '',
                 rank: 'bouncer',
                 type: 'exact',
                 functionality: function (chat, cmd) {
@@ -1388,7 +1388,7 @@
 
             autoskipCommand: {
                 command: 'autoskip',
-                rank: 'mod',
+                rank: 'manager',
                 type: 'exact',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -1469,6 +1469,34 @@
                     }
                 }
             },
+            
+            bouncerPlusCommand: {
+                command: 'bouncer+',
+                rank: 'mod',
+                type: 'exact',
+                functionality: function (chat, cmd) {
+                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
+                    else {
+                        var msg = chat.message;
+                        if (basicBot.settings.bouncerPlus) {
+                            basicBot.settings.bouncerPlus = false;
+                            return API.sendChat(subChat(basicBot.chat.toggleoff, {name: chat.un, 'function': 'Bouncer+'}));
+                        }
+                        else {
+                            if (!basicBot.settings.bouncerPlus) {
+                                var id = chat.uid;
+                                var perm = basicBot.userUtilities.getPermission(id);
+                                if (perm > 2) {
+                                    basicBot.settings.bouncerPlus = true;
+                                    return API.sendChat(subChat(basicBot.chat.toggleon, {name: chat.un, 'function': 'Bouncer+'}));
+                                }
+                            }
+                            else return API.sendChat(subChat(basicBot.chat.bouncerplusrank, {name: chat.un}));
+                        }
+                    }
+                }
+            },
 
             clearchatCommand: {
                 command: 'clearchat',
@@ -1535,7 +1563,8 @@
                     'dostal/a si :cookie: lásky! Ale pozor! Ak ju zješ zamiluješ sa do toho komu sa pozrieš ako prvému do očí!"',
                     'dostal/a si :cookie: na ktorej je lístok "Movni ma na 1.miesto" :blush:!',
                     'dostal/a si :cookie: na ktorej je lístok "Nejedz ma prosím" :joy:.',
-                    'ti chcel/a darovať :cookie:, Ale bola taká úžasná že ju zjedol sám.'
+                    'ti chcel/a darovať :cookie:, Ale bola taká úžasná že ju zjedol sám.',
+                    'dostal/a si kokainovú :cookie:.'
                 ],
                 getCookie: function () {
                     var c = Math.floor(Math.random() * this.cookies.length);
@@ -1711,20 +1740,6 @@
                 }
             },
 
-            fbCommand: {
-                command: 'fb',
-                rank: 'user',
-                type: 'exact',
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        if (typeof basicBot.settings.fbLink === "string")
-                            API.sendChat(subChat(basicBot.chat.facebook, {link: basicBot.settings.fbLink}));
-                    }
-                }
-            },
-
             filterCommand: {
                 command: 'filter',
                 rank: 'bouncer',
@@ -1781,7 +1796,7 @@
                             function get_id(api_key, fixedtag, func)
                             {
                                 $.getJSON(
-                                    "https://api.giphy.com/v1/gifs/random?", 
+                                    "https://tv.giphy.com/v1/gifs/random?", 
                                     { 
                                         "format": "json",
                                         "api_key": api_key,
@@ -1811,7 +1826,7 @@
                             function get_random_id(api_key, func)
                             {
                                 $.getJSON(
-                                    "https://api.giphy.com/v1/gifs/random?", 
+                                    "https://tv.giphy.com/v1/gifs/random?", 
                                     { 
                                         "format": "json",
                                         "api_key": api_key,
@@ -1853,7 +1868,7 @@
 
             historyskipCommand: {
                 command: 'historyskip',
-                rank: 'bouncer',
+                rank: 'manager',
                 type: 'exact',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -1910,7 +1925,7 @@
 
             offCommand: {
                 command: 'off',
-                rank: 'bouncer',
+                rank: 'mod',
                 type: 'exact',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -1958,7 +1973,7 @@
 
             lockdownCommand: {
                 command: 'lockdown',
-                rank: 'mod',
+                rank: 'manager',
                 type: 'exact',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -2010,8 +2025,8 @@
             },
 
             motdCommand: {
-                command: 'motd',
-                rank: 'bouncer',
+                command: '',
+                rank: '',
                 type: 'startsWith',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -2212,7 +2227,7 @@
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
-                        API.sendChat('/me System je vytvorený Užívateľom ' + botCreator + ', Developer Team> MrFalse; xWain.');
+                        API.sendChat('/me System je vytvorený Užívateľom ' + botCreator + ', Developer Team> MRFALSE.');
                     }
                 }
             },
@@ -2272,7 +2287,7 @@
 
             swapCommand: {
                 command: 'swap',
-                rank: 'mod',
+                rank: 'bouncer',
                 type: 'startsWith',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -2310,7 +2325,7 @@
 
             timeguardCommand: {
                 command: 'timeguard',
-                rank: 'bouncer',
+                rank: 'mod',
                 type: 'exact',
                 functionality: function (chat, cmd) {
                     if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
@@ -2434,62 +2449,6 @@
                     if (!basicBot.commands.executable(this.rank, chat)) return void (0);
                     else {
                         basicBot.roomUtilities.booth.unlockBooth();
-                    }
-                }
-            },
-
-            unmuteCommand: {
-                command: 'unmute',
-                rank: 'bouncer',
-                type: 'startsWith',
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        var msg = chat.message;
-                        var permFrom = basicBot.userUtilities.getPermission(chat.uid);
-                        /**
-                         if (msg.indexOf('@') === -1 && msg.indexOf('all') !== -1) {
-                            if (permFrom > 2) {
-                                basicBot.room.mutedUsers = [];
-                                return API.sendChat(subChat(basicBot.chat.unmutedeveryone, {name: chat.un}));
-                            }
-                            else return API.sendChat(subChat(basicBot.chat.unmuteeveryonerank, {name: chat.un}));
-                        }
-                         **/
-                        var from = chat.un;
-                        var name = msg.substr(cmd.length + 2);
-
-                        var user = basicBot.userUtilities.lookupUserName(name);
-
-                        if (typeof user === 'boolean') return API.sendChat(subChat(basicBot.chat.invaliduserspecified, {name: chat.un}));
-
-                        var permUser = basicBot.userUtilities.getPermission(user.id);
-                        if (permFrom > permUser) {
-                            /*
-                             var muted = basicBot.room.mutedUsers;
-                             var wasMuted = false;
-                             var indexMuted = -1;
-                             for (var i = 0; i < muted.length; i++) {
-                             if (muted[i] === user.id) {
-                             indexMuted = i;
-                             wasMuted = true;
-                             }
-
-                             }
-                             if (!wasMuted) return API.sendChat(subChat(basicBot.chat.notmuted, {name: chat.un}));
-                             basicBot.room.mutedUsers.splice(indexMuted);
-                             API.sendChat(subChat(basicBot.chat.unmuted, {name: chat.un, username: name}));
-                             */
-                            try {
-                                API.moderateUnmuteUser(user.id);
-                                API.sendChat(subChat(basicBot.chat.unmuted, {name: chat.un, username: name}));
-                            }
-                            catch (e) {
-                                API.sendChat(subChat(basicBot.chat.notmuted, {name: chat.un}));
-                            }
-                        }
-                        else API.sendChat(subChat(basicBot.chat.unmuterank, {name: chat.un}));
                     }
                 }
             },
@@ -2638,19 +2597,6 @@
                 }
             },
             
-            whylockCommand: {
-                command: 'whylock',
-                rank: 'user',
-                type: 'exact',
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        API.sendChat(subChat(basicBot.chat.whylock, {name: chat.un}));
-                    }
-                }
-            },
-			
 	    giftCommand: {
                 command: 'gift',
                 rank: 'user',
@@ -2658,7 +2604,16 @@
                 cookies: ['ti daroval/a balíček kondómu na dnešnú noc!',
                     'ti daroval/a balíček :cookie:!',
                     'ti daroval/a svoje oblečenie!',
-                    'ti daroval svoje Ego!'
+                    'ti daroval/a svoje Ego!',
+                    'ti daroval/a svoje spodné oblečenie!',
+                    'ti daroval/a svoj počítač!',
+                    'ti daroval/a peniaze!',
+                    'ti daroval/a jedlo aby si prežil!',
+                    'ti daroval/a balíček jahodových kondómov!',
+                    'ti daroval/a balíček jablkových kondómov!',
+                    'ti daroval/a balíček citrónových kondómov!',
+                    'ti daroval/a balíček mentolových kondómov!',
+                    'ti daroval/a svoju dušu!'
                 ],
                 getCookie: function () {
                     var c = Math.floor(Math.random() * this.cookies.length);
@@ -2692,58 +2647,6 @@
                 }
             },
             
-            bdsmCommand: {
-                command: 'bdsm',
-                rank: 'user',
-                type: 'startsWith',
-                cookies: ['ta zmrskal/a bičom tak, že si zabudol/a svoje meno.',
-                    'si vzal/a putá so strapcami a pripútal/a ťa k svojej posteli.'
-                ],
-                getCookie: function () {
-                    var c = Math.floor(Math.random() * this.cookies.length);
-                    return this.cookies[c];
-                },
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        var msg = chat.message;
-
-                        var space = msg.indexOf(' ');
-                        if (space === -1) {
-                            API.sendChat(basicBot.chat.givebdsm);
-                            return false;
-                        }
-                        else {
-                            var name = msg.substring(space + 2);
-                            var user = basicBot.userUtilities.lookupUserName(name);
-                            if (user === false || !user.inRoom) {
-                                return API.sendChat(subChat(basicBot.chat.nobdsm, {name: name}));
-                            }
-                            else if (user.username === chat.un) {
-                                return API.sendChat(subChat(basicBot.chat.selfbdsm, {name: name}));
-                            }
-                            else {
-                                return API.sendChat(subChat(basicBot.chat.bdsm, {nameto: user.username, namefrom: chat.un, cookie: this.getCookie()}));
-                            }
-                        }
-                    }
-                }
-            },
-            
-            webCommand: {
-                command: 'web',
-                rank: 'user',
-                type: 'exact',
-                functionality: function (chat, cmd) {
-                    if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
-                    if (!basicBot.commands.executable(this.rank, chat)) return void (0);
-                    else {
-                        API.sendChat(subChat(basicBot.chat.web, {name: chat.un}));
-                    }
-                }
-            },
-
             youtubeCommand: {
                 command: 'youtube',
                 rank: 'user',
