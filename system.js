@@ -1,4 +1,4 @@
-/**
+/*
  *Copyright 2015 MRFALSE
  *Tento System je upravený z pôvodného basicBota. Tento System vlastní MRFALSE.
  *System neprofituje žiadne peniaze. System je chránený licenčnou zmlúvou. Jeho skopirovanie sa prísne trestá!
@@ -54,7 +54,7 @@
     var loadChat = function (cb) {
         if (!cb) cb = function () {
         };
-        $.get("https://rawgit.com/DEVELOPERMF/DUPBOT/master/lang.json", function (json) {
+        $.get("https://rawgit.com/DEVELOPERMF/MFUBot/master/lang.json", function (json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== "undefined") {
                 langIndex = json;
@@ -179,21 +179,21 @@
     var botCreatorIDs = ["4635487", "4635487"];
 
     var basicBot = {
-        version: "1.2.3",
+        version: "1.2.5",
         status: true,
-        name: "DupBot",
+        name: "MFUBot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/DEVELOPERMF/DUPBOT/master/system.js",
+        scriptLink: "https://rawgit.com/DEVELOPERMF/MFUBot/master/system.js",
         cmdLink: "http://git.io/245Ppg",
-        chatLink: "https://rawgit.com/DEVELOPERMF/DUPBOT/master/slovak.json",
+        chatLink: "https://rawgit.com/DEVELOPERMF/MFUBot/master/slovak.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
         retrieveFromStorage: retrieveFromStorage,
         settings: {
-            botName: "DupBot",
+            botName: "MFUBot",
             language: "slovak",
-            chatLink: "https://rawgit.com/DEVELOPERMF/DUPBOT/master/slovak.json",
+            chatLink: "https://rawgit.com/DEVELOPERMF/MFUBot/master/slovak.json",
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
             startupEmoji: false, // true or false
@@ -298,8 +298,8 @@
             autodisableInterval: null,
             autodisableFunc: function () {
                 if (basicBot.status && basicBot.settings.autodisable) {
-                    API.sendChat('Daj :+1: našej facebook stránke> https://www.fb.com/dupcity');
-                    API.sendChat('Daj :+1: našej facebook stránke> https://www.fb.com/dupcity');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://www.fb.com/MFUczsk');
+                    API.sendChat('Daj :+1: našej facebook stránke> https://www.fb.com/MFUczsk');
                 }
             },
             queueing: 0,
