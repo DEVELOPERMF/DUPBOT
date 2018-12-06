@@ -1,4 +1,4 @@
 {
-    "english": "https://rawgit.com/Yemasthui/basicBot/master/lang/en.json",
-    "slovak": "https://rawgit.com/DEVELOPERMF/MFUBot/master/slovak.json"
+    "english": "https://cdn.jsdelivr.net/gh/Yemasthui/basicBot/lang/en.json",
+    "slovak": "https://cdn.jsdelivr.net/gh/DEVELOPERMF/MFUBot/slovak.json"
 }
