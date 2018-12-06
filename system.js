@@ -54,7 +54,7 @@
     var loadChat = function (cb) {
         if (!cb) cb = function () {
         };
-        $.get("https://rawgit.com/DEVELOPERMF/MFUBot/master/lang.json", function (json) {
+        $.get("https://cdn.jsdelivr.net/gh/DEVELOPERMF/MFUBot/lang.json", function (json) {
             var link = basicBot.chatLink;
             if (json !== null && typeof json !== "undefined") {
                 langIndex = json;
@@ -183,9 +183,9 @@
         status: true,
         name: "MFUBot",
         loggedInID: null,
-        scriptLink: "https://rawgit.com/DEVELOPERMF/MFUBot/master/system.js",
+        scriptLink: "https://cdn.jsdelivr.net/gh/DEVELOPERMF/MFUBot/system.js",
         cmdLink: "http://git.io/245Ppg",
-        chatLink: "https://rawgit.com/DEVELOPERMF/MFUBot/master/slovak.json",
+        chatLink: "https://cdn.jsdelivr.net/gh/DEVELOPERMF/MFUBot/slovak.json",
         chat: null,
         loadChat: loadChat,
         retrieveSettings: retrieveSettings,
@@ -193,7 +193,7 @@
         settings: {
             botName: "MFUBot",
             language: "slovak",
-            chatLink: "https://rawgit.com/DEVELOPERMF/MFUBot/master/slovak.json",
+            chatLink: "https://cdn.jsdelivr.net/gh/DEVELOPERMF/MFUBot/slovak.json",
             startupCap: 1, // 1-200
             startupVolume: 0, // 0-100
             startupEmoji: false, // true or false
